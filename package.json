@@ -1,0 +1,11 @@
+{
+	"type": "module",
+	"dependencies": {
+		"node-fetch": "^2.6.1",
+		"wrangler": "^3.41.0"
+	},
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"logs": "wrangler tail"
+	}
+}
