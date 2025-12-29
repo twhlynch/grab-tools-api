@@ -2,3 +2,8 @@ name = "grab-tools-api"
 main = "./worker.js"
 compatibility_date="2023-05-18"
 compatibility_flags = [ "nodejs_compat" ]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "grab-tools"
+database_id = "f918de74-f833-4feb-b146-cecd010567f2"
