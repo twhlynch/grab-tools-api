@@ -1,4 +1,6 @@
 import get_access_token from './endpoints/get_access_token';
+import get_verification_code from './endpoints/get_verification_code';
+import verify_account from './endpoints/verify_account';
 import sentry_proxy from './endpoints/sentry_proxy';
 
 async function handleRequest(request, env, ctx) {
@@ -13,7 +15,7 @@ async function handleRequest(request, env, ctx) {
 
 	try {
 		const url = new URL(request.url);
-		const route = url.pathname;
+		const route = url.pathname.slice(1);
 		let params = {
 			...Object.fromEntries(url.searchParams.entries()),
 		};
@@ -26,26 +28,25 @@ async function handleRequest(request, env, ctx) {
 			};
 		} catch {}
 
-		if (route === '/get_access_token') {
-			const { body, status } = await get_access_token(params, env);
-			return new Response(body, {
-				status,
-				headers,
-			});
-		} else if (route === '/sentry_proxy') {
+		// returns a response
+		if (route === 'sentry_proxy') {
 			return await sentry_proxy(request, body, env);
 		}
 
-		return new Response('Not found', {
-			headers,
-			status: 404,
-		});
+		const endpoints = {
+			get_access_token,
+			get_verification_code,
+			verify_account,
+		};
+		if (endpoints[route]) {
+			const { body, status } = await endpoints[route](params, env);
+			return new Response(body, { status, headers });
+		}
+
+		return new Response('Not found', { headers, status: 404 });
 	} catch (e) {
 		console.error(e);
-		return new Response('Internal Server Error', {
-			headers,
-			status: 500,
-		});
+		return new Response('Internal Server Error', { headers, status: 500 });
 	}
 }
 

@@ -6,6 +6,7 @@
 	},
 	"scripts": {
 		"deploy": "wrangler deploy",
-		"logs": "wrangler tail"
+		"logs": "wrangler tail",
+		"migrations": "sudo wrangler d1 migrations apply DB --remote"
 	}
 }
