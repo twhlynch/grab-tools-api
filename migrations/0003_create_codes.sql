@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS codes (
 	meta_id TEXT PRIMARY KEY,
-	code TEXT,
-	expiry INTEGER
+	code TEXT NOT NULL,
+	expiry INTEGER NOT NULL
 );

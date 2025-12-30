@@ -1,4 +1,7 @@
-export default async function set_user_info(params, env) {
+export default async function set_user_info(
+	params: { meta_id: string; user_name: string },
+	env: Env,
+): Promise<Boolean> {
 	const { meta_id, user_name } = params;
 
 	const query = env.DB.prepare(`

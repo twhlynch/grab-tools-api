@@ -2,10 +2,11 @@ import get_access_token from './endpoints/get_access_token';
 import get_verification_code from './endpoints/get_verification_code';
 import verify_account from './endpoints/verify_account';
 import sentry_proxy from './endpoints/sentry_proxy';
+import { Endpoint } from './types';
 
-async function handleRequest(request, env, ctx) {
-	const headers = build_headers(request, env, ctx);
-	const error = validate_request(request, env, ctx);
+async function handleRequest(request: Request, env: Env) {
+	const headers = build_headers(request);
+	const error = validate_request(request);
 	if (error) {
 		return new Response(error.body || null, {
 			headers,
@@ -33,7 +34,7 @@ async function handleRequest(request, env, ctx) {
 			return await sentry_proxy(request, body, env);
 		}
 
-		const endpoints = {
+		const endpoints: Record<string, Endpoint> = {
 			get_access_token,
 			get_verification_code,
 			verify_account,
@@ -50,7 +51,7 @@ async function handleRequest(request, env, ctx) {
 	}
 }
 
-function build_headers(request, env, ctx) {
+function build_headers(request: Request) {
 	const DOMAINS = ['grabvr.tools', 'twhlynch.me', '127.0.0.1', 'localhost'];
 
 	const headers = new Headers({
@@ -71,7 +72,7 @@ function build_headers(request, env, ctx) {
 	return headers;
 }
 
-function validate_request(request, env, ctx) {
+function validate_request(request: Request) {
 	if (request.method === 'OPTIONS') {
 		return {};
 	}

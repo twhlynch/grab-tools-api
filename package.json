@@ -2,11 +2,14 @@
 	"type": "module",
 	"dependencies": {
 		"node-fetch": "^2.6.1",
-		"wrangler": "^3.41.0"
+		"wrangler": "^4.54.0"
 	},
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"logs": "wrangler tail",
 		"migrations": "sudo wrangler d1 migrations apply DB --remote"
+	},
+	"devDependencies": {
+		"@types/node": "^25.0.3"
 	}
 }

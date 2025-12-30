@@ -1,4 +1,7 @@
-export default async function get_user_meta_info(params, env) {
+export default async function get_user_meta_info(
+	params: { access_token: string },
+	env: Env,
+): Promise<{ meta_id: string; user_name: string } | null> {
 	const { access_token } = params;
 
 	const user_info_response = await fetch(
@@ -10,7 +13,8 @@ export default async function get_user_meta_info(params, env) {
 		return null;
 	}
 
-	const user_info = await user_info_response.json();
+	const user_info: { id: string; alias: string } =
+		await user_info_response.json();
 
 	return {
 		meta_id: user_info.id,

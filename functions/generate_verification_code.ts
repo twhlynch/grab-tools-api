@@ -1,4 +1,7 @@
-export default async function generate_verification_code(params, env) {
+export default async function generate_verification_code(
+	params: { meta_id: string },
+	env: Env,
+): Promise<string | null> {
 	const { meta_id } = params;
 
 	const code = gen_code();

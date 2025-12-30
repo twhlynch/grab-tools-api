@@ -2,8 +2,9 @@ import get_user_info from '../functions/get_user_info';
 import get_user_meta_info from '../functions/get_user_meta_info';
 import set_user_info from '../functions/set_user_info';
 import set_user_token from '../functions/set_user_token';
+import { Endpoint } from '../types';
 
-export default async function get_access_token(params, env) {
+const get_access_token: Endpoint = async (params, env) => {
 	const { service_token } = params;
 	const { META_APP_ID, META_APP_SECRET } = env;
 	const app_token = `OC|${META_APP_ID}|${META_APP_SECRET}`;
@@ -24,7 +25,7 @@ export default async function get_access_token(params, env) {
 		console.error(await token_response.text());
 		return { body: 'SSO auth failed', status: 500 };
 	}
-	const token_json = await token_response.json();
+	const token_json: { oauth_token: string } = await token_response.json();
 	const access_token = token_json.oauth_token;
 
 	// get meta info
@@ -61,4 +62,5 @@ export default async function get_access_token(params, env) {
 		id: meta_id,
 	};
 	return { body: JSON.stringify(json), status: 200 };
-}
+};
+export default get_access_token;

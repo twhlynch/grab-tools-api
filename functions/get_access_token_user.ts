@@ -1,4 +1,9 @@
-export default async function get_access_token_user(params, env) {
+import { TokensRow, UsersRow } from '../types';
+
+export default async function get_access_token_user(
+	params: { access_token: string },
+	env: Env,
+): Promise<UsersRow | null> {
 	const { access_token } = params;
 
 	const token_query = env.DB.prepare(`
@@ -7,7 +12,9 @@ export default async function get_access_token_user(params, env) {
 		WHERE token = ?
 	`);
 
-	const token_row = await token_query.bind(access_token).first();
+	const token_row: TokensRow | null = await token_query
+		.bind(access_token)
+		.first();
 	if (!token_row) return null;
 
 	const { meta_id, expiry } = token_row;
@@ -22,7 +29,7 @@ export default async function get_access_token_user(params, env) {
 		LIMIT 1
 	`);
 
-	const row = await query.bind(meta_id).first();
+	const row: UsersRow | null = await query.bind(meta_id).first();
 
 	return row;
 }

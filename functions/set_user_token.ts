@@ -1,4 +1,7 @@
-export default async function set_user_token(params, env) {
+export default async function set_user_token(
+	params: { meta_id: string; access_token: string },
+	env: Env,
+): Promise<Boolean> {
 	const { meta_id, access_token } = params;
 
 	const query = env.DB.prepare(`

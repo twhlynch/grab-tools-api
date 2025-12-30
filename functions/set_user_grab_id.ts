@@ -1,4 +1,7 @@
-export default async function set_user_grab_id(params, env) {
+export default async function set_user_grab_id(
+	params: { meta_id: string; grab_id: string },
+	env: Env,
+): Promise<Boolean> {
 	const { meta_id, grab_id } = params;
 
 	const query = env.DB.prepare(`
