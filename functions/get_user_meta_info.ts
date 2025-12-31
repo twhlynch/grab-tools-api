@@ -1,6 +1,6 @@
 export default async function get_user_meta_info(
 	params: { access_token: string },
-	env: Env,
+	_env: Env,
 ): Promise<{ meta_id: string; user_name: string } | null> {
 	const { access_token } = params;
 

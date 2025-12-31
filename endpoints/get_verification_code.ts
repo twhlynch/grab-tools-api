@@ -1,6 +1,5 @@
 import generate_verification_code from '../functions/generate_verification_code';
 import get_access_token_user from '../functions/get_access_token_user';
-import { Endpoint } from '../types';
 
 const get_verification_code: Endpoint = async (params, env) => {
 	const { access_token } = params;

@@ -1,5 +1,3 @@
-import { UsersRow } from '../types';
-
 export default async function get_user_info(
 	params: { meta_id: string },
 	env: Env,

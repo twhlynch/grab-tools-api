@@ -1,8 +1,6 @@
-import { LevelDetails } from '../types';
-
 export default async function get_level_details(
 	params: { level_id: string },
-	env: Env,
+	_env: Env,
 ): Promise<LevelDetails | null> {
 	const { level_id } = params;
 

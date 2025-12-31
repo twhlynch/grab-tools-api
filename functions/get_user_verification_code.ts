@@ -1,5 +1,3 @@
-import { CodesRow } from '../types';
-
 export default async function get_user_verification_code(
 	params: { meta_id: string },
 	env: Env,

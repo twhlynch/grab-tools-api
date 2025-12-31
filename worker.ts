@@ -2,7 +2,6 @@ import get_access_token from './endpoints/get_access_token';
 import get_verification_code from './endpoints/get_verification_code';
 import verify_account from './endpoints/verify_account';
 import sentry_proxy from './endpoints/sentry_proxy';
-import { Endpoint } from './types';
 
 async function handleRequest(request: Request, env: Env) {
 	const headers = build_headers(request);

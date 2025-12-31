@@ -1,9 +1,7 @@
-import { UserInfo } from '../types';
-
 // doesnt work yet, uses placeholder endpoint
 export default async function get_access_token_grab_user(
 	params: { access_token: string },
-	env: Env,
+	_env: Env,
 ): Promise<UserInfo | null> {
 	const { access_token } = params;
 

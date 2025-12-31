@@ -2,7 +2,6 @@ import get_user_info from '../functions/get_user_info';
 import get_user_meta_info from '../functions/get_user_meta_info';
 import set_user_info from '../functions/set_user_info';
 import set_user_token from '../functions/set_user_token';
-import { Endpoint } from '../types';
 
 const get_access_token: Endpoint = async (params, env) => {
 	const { service_token } = params;

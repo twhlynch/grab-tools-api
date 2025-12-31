@@ -3,7 +3,6 @@ import get_access_token_user from '../functions/get_access_token_user';
 import get_level_details from '../functions/get_level_details';
 import get_user_verification_code from '../functions/get_user_verification_code';
 import set_user_grab_id from '../functions/set_user_grab_id';
-import { Endpoint } from '../types';
 
 const verify_account: Endpoint = async (params, env) => {
 	const { access_token, token, level_id } = params;
