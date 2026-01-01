@@ -8,6 +8,12 @@ export function build_url(base: string, params: Record<string, string>) {
 	return url.toString();
 }
 
+export function parse_boolean(raw: string): boolean | null {
+	if (raw === 'true') return true;
+	if (raw === 'false') return false;
+	return null;
+}
+
 // safe functions
 
 export async function safe_fetch(

@@ -5,6 +5,8 @@ import { sentry_proxy } from './endpoints/sentry_proxy';
 import { get_hardest_levels } from './endpoints/get_hardest_levels';
 import { add_hardest_level } from './endpoints/add_hardest_level';
 import { remove_hardest_level } from './endpoints/remove_hardest_level';
+import { set_allow_downloads } from './endpoints/set_allow_downloads';
+import { can_download_level } from './endpoints/can_download_level';
 
 async function handleRequest(request: Request, env: Env) {
 	const headers = build_headers(request);
@@ -43,6 +45,8 @@ async function handleRequest(request: Request, env: Env) {
 			add_hardest_level,
 			remove_hardest_level,
 			get_hardest_levels,
+			set_allow_downloads,
+			can_download_level,
 		};
 		if (endpoints[route]) {
 			const { body, status } = await endpoints[route](params, env);

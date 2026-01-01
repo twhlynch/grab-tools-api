@@ -106,3 +106,34 @@ List of:
 | `level_id` | `String` | GRAB level ID            |
 | `title`    | `String` | Level title              |
 | `creators` | `String` | Comma separated creators |
+
+## `/set_allow_downloads`
+
+### Request
+
+| Parameter      | Type      | Description     |
+| -------------- | --------- | --------------- |
+| `access_token` | `String`  | Access token    |
+| `level_id`     | `String`  | GRAB level ID   |
+| `user_id`      | `String`  | GRAB user ID    |
+| `allow`        | `Boolean` | Allow downloads |
+
+> Either `level_id` or `userid` are required, not both.
+
+### Response
+
+'Success'
+
+## `/can_download_level`
+
+### Request
+
+| Parameter  | Type     | Description   |
+| ---------- | -------- | ------------- |
+| `level_id` | `String` | GRAB level ID |
+
+### Response
+
+| Parameter | Type      | Description     |
+| --------- | --------- | --------------- |
+| `allow`   | `Boolean` | Allow downloads |
