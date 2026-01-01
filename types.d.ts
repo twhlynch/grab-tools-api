@@ -15,6 +15,7 @@ declare global {
 		grab_id: string | null;
 		user_name: string;
 		is_admin: 0 | 1;
+		is_list_moderator: 0 | 1;
 	};
 
 	export type TokensRow = {
@@ -27,6 +28,13 @@ declare global {
 		meta_id: string;
 		code: string;
 		expiry: number;
+	};
+
+	export type ListRow = {
+		position: number;
+		level_id: string;
+		title: string;
+		creators: string;
 	};
 
 	// GRAB API
