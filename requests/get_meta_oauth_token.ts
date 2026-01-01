@@ -1,0 +1,22 @@
+import { META_API } from '../config';
+import { build_url, safe_fetch_json } from '../utils';
+
+export default async function get_meta_oauth_token(
+	params: { org_scoped_id: string; code: string },
+	env: Env,
+): Promise<string | null> {
+	const { org_scoped_id, code } = params;
+	const { META_APP_ID, META_APP_SECRET } = env;
+
+	const url = build_url(`${META_API}sso_authorize_code`, {
+		code,
+		access_token: `OC|${META_APP_ID}|${META_APP_SECRET}`,
+		org_scoped_id,
+	});
+
+	const response = await safe_fetch_json<{ oauth_token: string }>(url, {
+		method: 'POST',
+	});
+
+	return response?.oauth_token ?? null;
+}

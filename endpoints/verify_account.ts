@@ -1,6 +1,6 @@
-import get_access_token_grab_user from '../functions/get_access_token_grab_user';
+import get_access_token_grab_user from '../requests/get_access_token_grab_user';
 import get_access_token_user from '../functions/get_access_token_user';
-import get_level_details from '../functions/get_level_details';
+import get_level_details from '../requests/get_level_details';
 import get_user_verification_code from '../functions/get_user_verification_code';
 import set_user_grab_id from '../functions/set_user_grab_id';
 
@@ -17,7 +17,7 @@ const verify_account: Endpoint = async (params, env) => {
 	if (!token && !level_id)
 		return { body: 'Either token or level_id is required', status: 400 };
 
-	let grab_id = null;
+	let grab_id: string | null = null;
 
 	if (token) {
 		// token -> user id

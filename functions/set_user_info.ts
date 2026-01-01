@@ -3,8 +3,9 @@ export default async function set_user_info(
 	env: Env,
 ): Promise<Boolean> {
 	const { meta_id, user_name } = params;
+	const { DB } = env;
 
-	const query = env.DB.prepare(`
+	const query = DB.prepare(`
 		INSERT INTO users (meta_id, grab_id, user_name, is_admin)
 		VALUES (?, ?, ?, ?)
 		ON CONFLICT(meta_id)

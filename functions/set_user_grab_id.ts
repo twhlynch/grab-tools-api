@@ -3,8 +3,9 @@ export default async function set_user_grab_id(
 	env: Env,
 ): Promise<Boolean> {
 	const { meta_id, grab_id } = params;
+	const { DB } = env;
 
-	const query = env.DB.prepare(`
+	const query = DB.prepare(`
 		UPDATE users
 		SET grab_id = ?
 		WHERE meta_id = ?

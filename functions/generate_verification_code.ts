@@ -3,10 +3,11 @@ export default async function generate_verification_code(
 	env: Env,
 ): Promise<string | null> {
 	const { meta_id } = params;
+	const { DB } = env;
 
 	const code = gen_code();
 
-	const query = env.DB.prepare(`
+	const query = DB.prepare(`
 		INSERT INTO codes (meta_id, code, expiry)
 		VALUES (?, ?, ?)
 		ON CONFLICT(meta_id)

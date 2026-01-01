@@ -3,8 +3,9 @@ export default async function set_user_token(
 	env: Env,
 ): Promise<Boolean> {
 	const { meta_id, access_token } = params;
+	const { DB } = env;
 
-	const query = env.DB.prepare(`
+	const query = DB.prepare(`
 		INSERT INTO tokens (meta_id, token, expiry)
 		VALUES (?, ?, ?)
 		ON CONFLICT(meta_id)
