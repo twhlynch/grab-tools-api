@@ -54,10 +54,10 @@ declare global {
 	export type UserInfo = {
 		user_id: string;
 		user_name?: string;
-		is_admin: Boolean;
-		is_supermoderator: Boolean;
-		is_moderator: Boolean;
-		is_verifier: Boolean;
-		is_creator: Boolean;
+		is_admin: boolean;
+		is_supermoderator: boolean;
+		is_moderator: boolean;
+		is_verifier: boolean;
+		is_creator: boolean;
 	};
 }

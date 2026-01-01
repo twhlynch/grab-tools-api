@@ -1,7 +1,7 @@
 export async function get_allow_level_downloads(
 	params: { level_id: string },
 	env: Env,
-): Promise<Boolean> {
+): Promise<boolean> {
 	const { level_id } = params;
 	const { DB } = env;
 

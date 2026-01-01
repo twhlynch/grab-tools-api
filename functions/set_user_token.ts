@@ -1,7 +1,7 @@
 export async function set_user_token(
 	params: { meta_id: string; access_token: string },
 	env: Env,
-): Promise<Boolean> {
+): Promise<boolean> {
 	const { meta_id, access_token } = params;
 	const { DB } = env;
 

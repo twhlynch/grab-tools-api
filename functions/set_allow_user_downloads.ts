@@ -1,7 +1,7 @@
 export async function set_allow_user_downloads(
 	params: { user_id: string; allow: boolean },
 	env: Env,
-): Promise<Boolean> {
+): Promise<boolean> {
 	const { user_id, allow } = params;
 	const { DB } = env;
 
