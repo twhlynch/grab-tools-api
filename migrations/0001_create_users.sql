@@ -5,3 +5,5 @@ CREATE TABLE IF NOT EXISTS users (
 	is_admin INTEGER NOT NULL DEFAULT 0,
 	is_list_moderator INTEGER NOT NULL DEFAULT 0
 );
+
+CREATE UNIQUE INDEX idx_users_grab_id ON users(grab_id);

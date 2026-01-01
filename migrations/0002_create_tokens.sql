@@ -3,3 +3,6 @@ CREATE TABLE IF NOT EXISTS tokens (
 	token TEXT NOT NULL,
 	expiry INTEGER NOT NULL
 );
+
+CREATE UNIQUE INDEX idx_tokens_token ON tokens(token);
+
