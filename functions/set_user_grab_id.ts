@@ -1,4 +1,4 @@
-export default async function set_user_grab_id(
+export async function set_user_grab_id(
 	params: { meta_id: string; grab_id: string },
 	env: Env,
 ): Promise<Boolean> {

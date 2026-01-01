@@ -1,4 +1,4 @@
-export default async function get_user_info(
+export async function get_user_info(
 	params: { meta_id: string },
 	env: Env,
 ): Promise<UsersRow | null> {

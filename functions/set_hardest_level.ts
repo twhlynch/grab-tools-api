@@ -1,6 +1,6 @@
-import get_level_details from '../requests/get_level_details';
+import { get_level_details } from '../requests/get_level_details';
 
-export default async function set_hardest_level(
+export async function set_hardest_level(
 	params: { level_id: string; position: number },
 	env: Env,
 ): Promise<boolean> {

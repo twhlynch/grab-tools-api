@@ -1,4 +1,4 @@
-export default async function get_hardest_levels_list(
+export async function get_hardest_levels_list(
 	_params: {},
 	env: Env,
 ): Promise<Array<ListRow> | null> {

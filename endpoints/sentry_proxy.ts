@@ -1,4 +1,4 @@
-export default async function sentry_proxy(
+export async function sentry_proxy(
 	request: Request,
 	body: string,
 	env: Env,

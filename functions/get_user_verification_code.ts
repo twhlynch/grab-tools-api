@@ -1,4 +1,4 @@
-export default async function get_user_verification_code(
+export async function get_user_verification_code(
 	params: { meta_id: string },
 	env: Env,
 ): Promise<string | null> {

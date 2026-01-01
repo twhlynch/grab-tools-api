@@ -1,7 +1,7 @@
-import generate_verification_code from '../functions/generate_verification_code';
-import get_access_token_user from '../functions/get_access_token_user';
+import { generate_verification_code } from '../functions/generate_verification_code';
+import { get_access_token_user } from '../functions/get_access_token_user';
 
-const get_verification_code: Endpoint = async (params, env) => {
+export const get_verification_code: Endpoint = async (params, env) => {
 	const { access_token } = params;
 	if (!access_token) return { body: 'Missing access_token', status: 400 };
 
@@ -17,5 +17,3 @@ const get_verification_code: Endpoint = async (params, env) => {
 	const json = { code };
 	return { body: JSON.stringify(json), status: 200 };
 };
-
-export default get_verification_code;

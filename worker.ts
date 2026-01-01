@@ -1,10 +1,10 @@
-import get_access_token from './endpoints/get_access_token';
-import get_verification_code from './endpoints/get_verification_code';
-import verify_account from './endpoints/verify_account';
-import sentry_proxy from './endpoints/sentry_proxy';
-import get_hardest_levels from './endpoints/get_hardest_levels';
-import add_hardest_level from './endpoints/add_hardest_level';
-import remove_hardest_level from './endpoints/remove_hardest_level';
+import { get_access_token } from './endpoints/get_access_token';
+import { get_verification_code } from './endpoints/get_verification_code';
+import { verify_account } from './endpoints/verify_account';
+import { sentry_proxy } from './endpoints/sentry_proxy';
+import { get_hardest_levels } from './endpoints/get_hardest_levels';
+import { add_hardest_level } from './endpoints/add_hardest_level';
+import { remove_hardest_level } from './endpoints/remove_hardest_level';
 
 async function handleRequest(request: Request, env: Env) {
 	const headers = build_headers(request);

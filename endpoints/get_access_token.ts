@@ -1,10 +1,10 @@
-import get_user_info from '../functions/get_user_info';
-import get_user_meta_info from '../requests/get_meta_user_info';
-import set_user_info from '../functions/set_user_info';
-import set_user_token from '../functions/set_user_token';
-import get_meta_oauth_token from '../requests/get_meta_oauth_token';
+import { get_user_info } from '../functions/get_user_info';
+import { get_meta_user_info } from '../requests/get_meta_user_info';
+import { set_user_info } from '../functions/set_user_info';
+import { set_user_token } from '../functions/set_user_token';
+import { get_meta_oauth_token } from '../requests/get_meta_oauth_token';
 
-const get_access_token: Endpoint = async (params, env) => {
+export const get_access_token: Endpoint = async (params, env) => {
 	const { service_token } = params;
 
 	if (!service_token) return { body: 'Missing service_token', status: 400 };
@@ -18,7 +18,7 @@ const get_access_token: Endpoint = async (params, env) => {
 	if (!access_token) return { body: 'SSO auth failed', status: 500 };
 
 	// get meta info
-	const meta_info = await get_user_meta_info({ access_token }, env);
+	const meta_info = await get_meta_user_info({ access_token }, env);
 	if (!meta_info) return { body: 'Failed to get user info', status: 500 };
 
 	const { meta_id, user_name } = meta_info;
@@ -52,4 +52,3 @@ const get_access_token: Endpoint = async (params, env) => {
 	};
 	return { body: JSON.stringify(json), status: 200 };
 };
-export default get_access_token;

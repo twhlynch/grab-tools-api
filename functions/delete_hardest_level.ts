@@ -1,4 +1,4 @@
-export default async function delete_hardest_level(
+export async function delete_hardest_level(
 	params: { level_id: string },
 	env: Env,
 ): Promise<boolean> {

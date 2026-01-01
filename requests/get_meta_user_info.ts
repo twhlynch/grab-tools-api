@@ -1,7 +1,7 @@
 import { META_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
-export default async function get_meta_user_info(
+export async function get_meta_user_info(
 	params: { access_token: string },
 	_env: Env,
 ): Promise<{ meta_id: string; user_name: string } | null> {

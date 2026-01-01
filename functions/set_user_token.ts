@@ -1,4 +1,4 @@
-export default async function set_user_token(
+export async function set_user_token(
 	params: { meta_id: string; access_token: string },
 	env: Env,
 ): Promise<Boolean> {

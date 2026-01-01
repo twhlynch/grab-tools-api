@@ -1,7 +1,7 @@
-import get_access_token_user from '../functions/get_access_token_user';
-import delete_hardest_level from '../functions/delete_hardest_level';
+import { get_access_token_user } from '../functions/get_access_token_user';
+import { delete_hardest_level } from '../functions/delete_hardest_level';
 
-const remove_hardest_level: Endpoint = async (params, env) => {
+export const remove_hardest_level: Endpoint = async (params, env) => {
 	const { level_id, access_token } = params;
 
 	if (!level_id) return { body: 'level_id is required', status: 400 };
@@ -18,5 +18,3 @@ const remove_hardest_level: Endpoint = async (params, env) => {
 
 	return { body: 'Success', status: 200 };
 };
-
-export default remove_hardest_level;

@@ -1,4 +1,4 @@
-export default async function get_access_token_user(
+export async function get_access_token_user(
 	params: { access_token: string },
 	env: Env,
 ): Promise<UsersRow | null> {

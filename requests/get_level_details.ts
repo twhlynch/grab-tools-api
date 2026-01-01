@@ -1,7 +1,7 @@
 import { GRAB_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
-export default async function get_level_details(
+export async function get_level_details(
 	params: { level_id: string },
 	_env: Env,
 ): Promise<LevelDetails | null> {

@@ -1,10 +1,10 @@
-import get_access_token_grab_user from '../requests/get_access_token_grab_user';
-import get_access_token_user from '../functions/get_access_token_user';
-import get_level_details from '../requests/get_level_details';
-import get_user_verification_code from '../functions/get_user_verification_code';
-import set_user_grab_id from '../functions/set_user_grab_id';
+import { get_access_token_grab_user } from '../requests/get_access_token_grab_user';
+import { get_access_token_user } from '../functions/get_access_token_user';
+import { get_level_details } from '../requests/get_level_details';
+import { get_user_verification_code } from '../functions/get_user_verification_code';
+import { set_user_grab_id } from '../functions/set_user_grab_id';
 
-const verify_account: Endpoint = async (params, env) => {
+export const verify_account: Endpoint = async (params, env) => {
 	const { access_token, token, level_id } = params;
 	if (!access_token) return { body: 'Missing access_token', status: 400 };
 
@@ -60,5 +60,3 @@ const verify_account: Endpoint = async (params, env) => {
 
 	return { body: 'Either token or level_id is required', status: 400 };
 };
-
-export default verify_account;

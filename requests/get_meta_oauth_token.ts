@@ -1,7 +1,7 @@
 import { META_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
-export default async function get_meta_oauth_token(
+export async function get_meta_oauth_token(
 	params: { org_scoped_id: string; code: string },
 	env: Env,
 ): Promise<string | null> {

@@ -1,4 +1,4 @@
-export default async function set_user_info(
+export async function set_user_info(
 	params: { meta_id: string; user_name: string },
 	env: Env,
 ): Promise<Boolean> {
