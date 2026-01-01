@@ -6,7 +6,7 @@ export const can_download_level: Endpoint = async (params, env) => {
 	if (!level_id) return { body: 'level_id is required', status: 400 };
 
 	const allow = await get_allow_level_downloads({ level_id }, env);
+	if (!allow) return { body: 'Check failed', status: 500 };
 
-	const json = { allow };
-	return { body: JSON.stringify(json), status: 200 };
+	return { body: JSON.stringify(allow), status: 200 };
 };
