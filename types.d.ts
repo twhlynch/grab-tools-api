@@ -4,7 +4,7 @@ declare global {
 	// General
 
 	export type Endpoint = (
-		params: Record<string, any>,
+		params: Record<string, string | undefined>,
 		env: any,
 	) => Promise<{ body: string; status: number }>;
 
