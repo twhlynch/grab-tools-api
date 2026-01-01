@@ -7,10 +7,9 @@ export async function get_level_details(
 ): Promise<LevelDetails | null> {
 	const { level_id } = params;
 
-	const url = build_url(
-		`${GRAB_API}details/${level_id.replace(':', '/')}`,
-		{},
-	);
+	const [user_id, level_timestamp] = level_id.split(':');
+
+	const url = build_url(`${GRAB_API}details/${user_id}/${level_timestamp}`);
 
 	return await safe_fetch_json<LevelDetails>(url);
 }

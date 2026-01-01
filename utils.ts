@@ -1,7 +1,7 @@
-export function build_url(base: string, params: Record<string, string>) {
+export function build_url(base: string, params?: Record<string, string>) {
 	const url = new URL(base);
 
-	Object.entries(params).forEach(([key, value]) => {
+	Object.entries(params ?? {}).forEach(([key, value]) => {
 		url.searchParams.set(key, value);
 	});
 

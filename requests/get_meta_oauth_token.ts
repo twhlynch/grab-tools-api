@@ -8,9 +8,11 @@ export async function get_meta_oauth_token(
 	const { org_scoped_id, code } = params;
 	const { META_APP_ID, META_APP_SECRET } = env;
 
+	const access_token = `OC|${META_APP_ID}|${META_APP_SECRET}`;
+
 	const url = build_url(`${META_API}sso_authorize_code`, {
 		code,
-		access_token: `OC|${META_APP_ID}|${META_APP_SECRET}`,
+		access_token,
 		org_scoped_id,
 	});
 
