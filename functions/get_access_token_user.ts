@@ -1,3 +1,5 @@
+import { clean_user_booleans } from '../utils';
+
 export async function get_access_token_user(
 	params: { access_token: string },
 	env: Env,
@@ -29,6 +31,10 @@ export async function get_access_token_user(
 	`);
 
 	const row = await query.bind(meta_id).first<UsersRow | null>();
+
+	if (!row) return null;
+
+	clean_user_booleans(row);
 
 	return row;
 }

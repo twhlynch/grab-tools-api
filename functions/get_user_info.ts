@@ -1,3 +1,5 @@
+import { clean_user_booleans } from '../utils';
+
 export async function get_user_info(
 	params: { meta_id: string },
 	env: Env,
@@ -13,6 +15,10 @@ export async function get_user_info(
 	`);
 
 	const row = await query.bind(meta_id).first<UsersRow | null>();
+
+	if (!row) return null;
+
+	clean_user_booleans(row);
 
 	return row;
 }

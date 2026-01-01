@@ -14,8 +14,8 @@ declare global {
 		meta_id: string;
 		grab_id: string | null;
 		user_name: string;
-		is_admin: 0 | 1;
-		is_list_moderator: 0 | 1;
+		is_admin: boolean;
+		is_list_moderator: boolean;
 	};
 
 	export type TokensRow = {

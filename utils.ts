@@ -14,6 +14,11 @@ export function parse_boolean(raw: string): boolean | null {
 	return null;
 }
 
+export function clean_user_booleans(user: UsersRow): void {
+	user.is_admin = !!user.is_admin;
+	user.is_list_moderator = !!user.is_list_moderator;
+}
+
 // safe functions
 
 export async function safe_fetch(
