@@ -7,6 +7,8 @@
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"logs": "wrangler tail",
+		"dev": "wrangler dev",
+		"build": "wrangler build",
 		"migrations": "sudo wrangler d1 migrations apply DB --remote"
 	},
 	"devDependencies": {
