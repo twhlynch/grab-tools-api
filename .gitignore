@@ -1,5 +1,15 @@
-/node_modules
-.env
-/worker-configuration.d.ts
+# system
+.DS_Store
+
+# build output
+/dist
 /.wrangler
 
+# dependencies
+/node_modules
+
+# generated wrangler types
+/worker-configuration.d.ts
+
+# secrets
+/.env
