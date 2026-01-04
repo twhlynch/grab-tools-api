@@ -12,7 +12,6 @@ export async function delete_hardest_level(
 	`;
 
 	const row = await position_query.first<{ position: number }>();
-
 	if (!row) return true; // doesnt exist
 
 	const { position } = row;
