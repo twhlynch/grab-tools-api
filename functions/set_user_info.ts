@@ -1,6 +1,6 @@
 export async function set_user_info(
 	params: { meta_id: string; user_name: string },
-	env: Env,
+	env: Ctx,
 ): Promise<boolean> {
 	const { meta_id, user_name } = params;
 	const { DB } = env;

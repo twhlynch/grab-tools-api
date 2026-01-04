@@ -1,7 +1,7 @@
 export async function sentry_proxy(
 	request: Request,
 	body: string,
-	env: Env,
+	env: Ctx,
 ): Promise<Response> {
 	const { SENTRY_PUBLIC_KEY, SENTRY_INGEST_HOST, SENTRY_PROJECT_ID } = env;
 

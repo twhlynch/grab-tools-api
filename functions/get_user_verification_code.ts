@@ -1,6 +1,6 @@
 export async function get_user_verification_code(
 	params: { meta_id: string },
-	env: Env,
+	env: Ctx,
 ): Promise<string | null> {
 	const { meta_id } = params;
 	const { DB } = env;

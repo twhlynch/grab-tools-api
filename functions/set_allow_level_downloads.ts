@@ -1,6 +1,6 @@
 export async function set_allow_level_downloads(
 	params: { level_id: string; allow: boolean },
-	env: Env,
+	env: Ctx,
 ): Promise<boolean> {
 	const { level_id, allow } = params;
 	const { DB } = env;

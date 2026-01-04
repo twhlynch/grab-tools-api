@@ -5,8 +5,13 @@ declare global {
 
 	export type Endpoint = (
 		params: Record<string, string | undefined>,
-		env: any,
+		env: Ctx,
 	) => Promise<{ body: string; status: number }>;
+
+	export type Ctx = Env & {
+		GRAB_API: string;
+		META_API: string;
+	};
 
 	// DB Rows
 

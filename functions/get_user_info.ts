@@ -2,7 +2,7 @@ import { clean_user_booleans } from '../utils';
 
 export async function get_user_info(
 	params: { meta_id: string },
-	env: Env,
+	env: Ctx,
 ): Promise<UsersRow | null> {
 	const { meta_id } = params;
 	const { DB } = env;

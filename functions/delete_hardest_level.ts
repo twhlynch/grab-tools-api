@@ -1,6 +1,6 @@
 export async function delete_hardest_level(
 	params: { level_id: string },
-	env: Env,
+	env: Ctx,
 ): Promise<boolean> {
 	const { level_id } = params;
 	const { DB } = env;

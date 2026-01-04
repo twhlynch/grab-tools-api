@@ -1,6 +1,6 @@
 export async function set_user_grab_id(
 	params: { meta_id: string; grab_id: string },
-	env: Env,
+	env: Ctx,
 ): Promise<boolean> {
 	const { meta_id, grab_id } = params;
 	const { DB } = env;

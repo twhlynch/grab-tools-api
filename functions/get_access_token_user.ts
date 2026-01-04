@@ -2,7 +2,7 @@ import { clean_user_booleans } from '../utils';
 
 export async function get_access_token_user(
 	params: { access_token: string },
-	env: Env,
+	env: Ctx,
 ): Promise<UsersRow | null> {
 	const { access_token } = params;
 	const { DB } = env;

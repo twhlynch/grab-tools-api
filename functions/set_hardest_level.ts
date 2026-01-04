@@ -2,7 +2,7 @@ import { get_level_details } from '../requests/get_level_details';
 
 export async function set_hardest_level(
 	params: { level_id: string; position: number },
-	env: Env,
+	env: Ctx,
 ): Promise<boolean> {
 	const { level_id, position } = params;
 	const { DB } = env;

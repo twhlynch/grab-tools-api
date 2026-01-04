@@ -7,8 +7,9 @@ import { add_hardest_level } from './endpoints/add_hardest_level';
 import { remove_hardest_level } from './endpoints/remove_hardest_level';
 import { set_allow_downloads } from './endpoints/set_allow_downloads';
 import { can_download_level } from './endpoints/can_download_level';
+import { GRAB_API, META_API } from './config';
 
-async function handleRequest(request: Request, env: Env) {
+async function handleRequest(request: Request, _env: Env) {
 	const headers = build_headers(request);
 	const error = validate_request(request);
 	if (error) {
@@ -17,6 +18,8 @@ async function handleRequest(request: Request, env: Env) {
 			status: error.status,
 		});
 	}
+
+	const env = inject_globals(_env);
 
 	try {
 		const url = new URL(request.url);
@@ -101,6 +104,14 @@ function validate_request(request: Request) {
 	}
 
 	return null; // valid
+}
+
+function inject_globals(env: Env): Ctx {
+	return {
+		...env,
+		GRAB_API,
+		META_API,
+	};
 }
 
 export default {

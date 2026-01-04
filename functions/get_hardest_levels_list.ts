@@ -1,6 +1,6 @@
 export async function get_hardest_levels_list(
 	_params: {},
-	env: Env,
+	env: Ctx,
 ): Promise<Array<ListRow> | null> {
 	const { DB } = env;
 
