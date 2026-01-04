@@ -3,19 +3,18 @@ export async function get_user_verification_code(
 	env: Ctx,
 ): Promise<string | null> {
 	const { meta_id } = params;
-	const { DB } = env;
 
-	const query = DB.prepare(`
+	const query = env.sql`
 		SELECT *
 		FROM codes
-		WHERE meta_id = ?
-	`);
+		WHERE meta_id = ${meta_id}
+	`;
 
-	const row = await query.bind(meta_id).first<CodesRow | null>();
+	const row = await query.first<CodesRow | null>();
 	if (!row) return null;
-
 	const { code, expiry } = row;
 
+	// check expiry
 	const now = Math.floor(Date.now() / 1000);
 	if (now > expiry) return null;
 

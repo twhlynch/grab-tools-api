@@ -3,17 +3,16 @@ export async function set_allow_user_downloads(
 	env: Ctx,
 ): Promise<boolean> {
 	const { user_id, allow } = params;
-	const { DB } = env;
 
-	const query = DB.prepare(`
+	const query = env.sql`
 		INSERT INTO user_downloads (grab_id, allow)
-		VALUES (?, ?)
+		VALUES (${user_id}, ${+allow})
 		ON CONFLICT(grab_id)
 		DO UPDATE SET
 			allow = excluded.allow
-	`);
+	`;
 
-	const { success } = await query.bind(user_id, allow ? 1 : 0).run();
+	const { success } = await query.run();
 
 	return success;
 }

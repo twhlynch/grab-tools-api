@@ -13,78 +13,69 @@ export async function set_hardest_level(
 	const title = level_details.title ?? '';
 	const creators = level_details.creators?.join(', ') ?? '';
 
-	const position_query = DB.prepare(`
+	const position_query = env.sql`
 		SELECT position
 		FROM list
-		WHERE level_id = ?
-	`);
+		WHERE level_id = ${level_id}
+	`;
 
-	const row = await position_query
-		.bind(level_id)
-		.first<{ position: number }>();
+	const row = await position_query.first<{ position: number }>();
 
 	const statements: D1PreparedStatement[] = [];
 
 	if (!row) {
-		const shift_query = DB.prepare(`
+		const shift_query = env.sql`
 			UPDATE list
 			SET position = position + 1
-			WHERE position >= ?
-		`);
+			WHERE position >= ${position}
+		`;
 
-		const insert_query = DB.prepare(`
+		const insert_query = env.sql`
 			INSERT INTO list (level_id, position, title, creators)
-			VALUES (?, ?, ?, ?)
-		`);
+			VALUES (${level_id}, ${position}, ${title}, ${creators})
+		`;
 
 		// shift down then insert
-		statements.push(
-			shift_query.bind(position),
-			insert_query.bind(level_id, position, title, creators),
-		);
+		statements.push(shift_query, insert_query);
 	} else {
 		const old_position = row.position;
 
 		if (old_position !== position) {
 			if (position < old_position) {
 				// moving up, shift down
-				const shift_query = DB.prepare(`
+				const shift_query = env.sql`
 					UPDATE list
 					SET position = position + 1
-					WHERE position >= ?
-						AND position < ?
-						AND level_id != ?
-				`);
+					WHERE position >= ${position}
+						AND position < ${old_position}
+						AND level_id != ${level_id}
+				`;
 
-				statements.push(
-					shift_query.bind(position, old_position, level_id),
-				);
+				statements.push(shift_query);
 			} else {
 				// moving down, shift up
-				const shift_query = DB.prepare(`
+				const shift_query = env.sql`
 					UPDATE list
 					SET position = position - 1
-					WHERE position > ?
-						AND position <= ?
-						AND level_id != ?
-				`);
+					WHERE position > ${old_position}
+						AND position <= ${position}
+						AND level_id != ${level_id}
+				`;
 
-				statements.push(
-					shift_query.bind(old_position, position, level_id),
-				);
+				statements.push(shift_query);
 			}
 		}
 
 		// update target
-		const update_query = DB.prepare(`
+		const update_query = env.sql`
 			UPDATE list
-			SET position = ?,
-				title = ?,
-				creators = ?
-			WHERE level_id = ?
-		`);
+			SET position = ${position},
+				title = ${title},
+				creators = ${creators}
+			WHERE level_id = ${level_id}
+		`;
 
-		statements.push(update_query.bind(position, title, creators, level_id));
+		statements.push(update_query);
 	}
 
 	const results = await DB.batch(statements);

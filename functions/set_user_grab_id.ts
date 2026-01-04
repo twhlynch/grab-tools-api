@@ -3,15 +3,14 @@ export async function set_user_grab_id(
 	env: Ctx,
 ): Promise<boolean> {
 	const { meta_id, grab_id } = params;
-	const { DB } = env;
 
-	const query = DB.prepare(`
+	const query = env.sql`
 		UPDATE users
-		SET grab_id = ?
-		WHERE meta_id = ?
-	`);
+		SET grab_id = ${grab_id}
+		WHERE meta_id = ${meta_id}
+	`;
 
-	const { success } = await query.bind(grab_id, meta_id).run();
+	const { success } = await query.run();
 
 	return success;
 }

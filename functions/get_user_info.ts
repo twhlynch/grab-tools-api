@@ -5,17 +5,15 @@ export async function get_user_info(
 	env: Ctx,
 ): Promise<UsersRow | null> {
 	const { meta_id } = params;
-	const { DB } = env;
 
-	const query = DB.prepare(`
+	const query = env.sql`
 		SELECT *
 		FROM users
-		WHERE meta_id = ?
+		WHERE meta_id = ${meta_id}
 		LIMIT 1
-	`);
+	`;
 
-	const row = await query.bind(meta_id).first<UsersRow | null>();
-
+	const row = await query.first<UsersRow | null>();
 	if (!row) return null;
 
 	clean_user_booleans(row);

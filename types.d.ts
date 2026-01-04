@@ -11,6 +11,10 @@ declare global {
 	export type Ctx = Env & {
 		GRAB_API: string;
 		META_API: string;
+		sql: (
+			strings: TemplateStringsArray,
+			...values: any[]
+		) => D1PreparedStatement;
 	};
 
 	// DB Rows

@@ -3,17 +3,16 @@ export async function set_allow_level_downloads(
 	env: Ctx,
 ): Promise<boolean> {
 	const { level_id, allow } = params;
-	const { DB } = env;
 
-	const query = DB.prepare(`
+	const query = env.sql`
 		INSERT INTO downloads (level_id, allow)
-		VALUES (?, ?)
+		VALUES (${level_id}, ${+allow})
 		ON CONFLICT(level_id)
 		DO UPDATE SET
 			allow = excluded.allow
-	`);
+	`;
 
-	const { success } = await query.bind(level_id, allow ? 1 : 0).run();
+	const { success } = await query.run();
 
 	return success;
 }

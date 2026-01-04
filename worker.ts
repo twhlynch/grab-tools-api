@@ -111,6 +111,13 @@ function inject_globals(env: Env): Ctx {
 		...env,
 		GRAB_API,
 		META_API,
+		sql: (
+			strings: TemplateStringsArray,
+			...values: any[]
+		): D1PreparedStatement => {
+			const query = strings.join('?');
+			return env.DB.prepare(query).bind(...values);
+		},
 	};
 }
 
