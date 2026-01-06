@@ -16,7 +16,7 @@ export async function get_allow_level_downloads(
 	`;
 
 	const result = await query.first<{ allow: 0 | 1 | -1 } | null>();
-	if (!result) return null;
+	if (!result) return { allow: null };
 
 	return {
 		allow: {
