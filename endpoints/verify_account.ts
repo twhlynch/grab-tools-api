@@ -22,7 +22,7 @@ export const verify_account: Endpoint = async (params, env) => {
 	if (token) {
 		// token -> user id
 		const grab_user = await get_access_token_grab_user(
-			{ access_token },
+			{ access_token: token },
 			env,
 		);
 		if (!grab_user)
