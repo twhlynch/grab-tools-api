@@ -2,7 +2,7 @@ export async function get_hardest_levels_list(
 	params: { limit?: number },
 	env: Ctx,
 ): Promise<Array<ListRow> | null> {
-	const LIMIT = 200;
+	const LIMIT = 201;
 
 	const limit = Math.min(params.limit ?? LIMIT, LIMIT);
 
