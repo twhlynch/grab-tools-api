@@ -1,11 +1,12 @@
 import { get_level_details } from '../requests/get_level_details';
+import { send_discord_message } from '../requests/send_discord_message';
 
 export async function set_hardest_level(
 	params: { level_id: string; position: number },
 	env: Ctx,
 ): Promise<boolean> {
 	const { level_id, position } = params;
-	const { DB } = env;
+	const { DB, HARDEST_PEOPLE_CHANNEL } = env;
 
 	const level_details = await get_level_details({ level_id }, env);
 	if (!level_details) return false;
@@ -80,5 +81,13 @@ export async function set_hardest_level(
 
 	const results = await DB.batch(statements);
 
-	return results.every((r) => r.success);
+	const success = results.every((r) => r.success);
+
+	const content = `Set **${title}** by *${creators}* to position **${position}**`;
+	await send_discord_message(
+		{ channel_id: HARDEST_PEOPLE_CHANNEL, content },
+		env,
+	);
+
+	return success;
 }
