@@ -64,7 +64,13 @@ async function handleRequest(request: Request, _env: Env) {
 }
 
 function build_headers(request: Request) {
-	const DOMAINS = ['grabvr.tools', 'twhlynch.me', '127.0.0.1', 'localhost'];
+	const DOMAINS = [
+		'grabvr.tools',
+		'grabvr.quest',
+		'twhlynch.me',
+		'127.0.0.1',
+		'localhost',
+	];
 
 	const headers = new Headers({
 		'Content-Type': 'application/json',
