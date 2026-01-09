@@ -7,7 +7,7 @@ import { add_hardest_level } from './endpoints/add_hardest_level';
 import { remove_hardest_level } from './endpoints/remove_hardest_level';
 import { set_allow_downloads } from './endpoints/set_allow_downloads';
 import { can_download_level } from './endpoints/can_download_level';
-import { GRAB_API, META_API } from './config';
+import { GRAB_API, META_API, HARDEST_PEOPLE_CHANNEL } from './config';
 
 async function handleRequest(request: Request, _env: Env) {
 	const headers = build_headers(request);
@@ -117,6 +117,7 @@ function inject_globals(env: Env): Ctx {
 		...env,
 		GRAB_API,
 		META_API,
+		HARDEST_PEOPLE_CHANNEL,
 		sql: (
 			strings: TemplateStringsArray,
 			...values: any[]
