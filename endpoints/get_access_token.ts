@@ -38,13 +38,14 @@ export const get_access_token: Endpoint = async (params, env) => {
 	if (!tok_success)
 		return { body: 'Failed to setup access token', status: 500 };
 
-	const { grab_id, is_admin } = user_info;
+	const { grab_id, is_admin, is_list_moderator } = user_info;
 
 	const json = {
 		user_name,
 		grab_id,
 		is_admin,
 		access_token,
+		is_list_moderator,
 
 		// deprecated
 		alias: user_name,
