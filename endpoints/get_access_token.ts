@@ -48,10 +48,6 @@ export const get_access_token: Endpoint = async (params, env) => {
 		access_token,
 		is_list_moderator,
 		expiry,
-
-		// deprecated
-		alias: user_name,
-		id: meta_id,
 	};
 	return { body: JSON.stringify(json), status: 200 };
 };
