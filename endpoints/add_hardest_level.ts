@@ -1,5 +1,7 @@
+import { HARDEST_PEOPLE_CHANNEL, VIEWER_URL } from '../config';
 import { get_access_token_user } from '../functions/get_access_token_user';
 import { set_hardest_level } from '../functions/set_hardest_level';
+import { send_discord_message } from '../requests/send_discord_message';
 
 export const add_hardest_level: Endpoint = async (params, env) => {
 	const { level_id, position: position_raw, access_token } = params;
@@ -18,8 +20,17 @@ export const add_hardest_level: Endpoint = async (params, env) => {
 	const { is_list_moderator } = user_info;
 	if (!is_list_moderator) return { body: 'Not allowed', status: 401 };
 
-	const success = await set_hardest_level({ level_id, position }, env);
-	if (!success) return { body: 'Failed to update list', status: 500 };
+	const level_details = await set_hardest_level({ level_id, position }, env);
+	if (!level_details) return { body: 'Failed to update list', status: 500 };
+
+	const title = level_details.title ?? '';
+	const creators = level_details.creators?.join(', ') ?? '';
+
+	const content = `Set **[${title}](${VIEWER_URL}${level_id})** by *${creators}* to position **${position}**`;
+	await send_discord_message(
+		{ channel_id: HARDEST_PEOPLE_CHANNEL, content },
+		env,
+	);
 
 	return { body: 'Success', status: 200 };
 };

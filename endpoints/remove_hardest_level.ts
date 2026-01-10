@@ -1,5 +1,7 @@
 import { get_access_token_user } from '../functions/get_access_token_user';
 import { delete_hardest_level } from '../functions/delete_hardest_level';
+import { send_discord_message } from '../requests/send_discord_message';
+import { HARDEST_PEOPLE_CHANNEL, VIEWER_URL } from '../config';
 
 export const remove_hardest_level: Endpoint = async (params, env) => {
 	const { level_id, access_token } = params;
@@ -13,8 +15,16 @@ export const remove_hardest_level: Endpoint = async (params, env) => {
 	const { is_list_moderator } = user_info;
 	if (!is_list_moderator) return { body: 'Not allowed', status: 401 };
 
-	const success = await delete_hardest_level({ level_id }, env);
-	if (!success) return { body: 'Failed to update list', status: 500 };
+	const result = await delete_hardest_level({ level_id }, env);
+	if (!result) return { body: 'Failed to update list', status: 500 };
+
+	const { title, position, creators } = result;
+
+	const content = `Removed **[${title}](${VIEWER_URL}${level_id})** by *${creators}* from ${position}`;
+	await send_discord_message(
+		{ channel_id: HARDEST_PEOPLE_CHANNEL, content },
+		env,
+	);
 
 	return { body: 'Success', status: 200 };
 };

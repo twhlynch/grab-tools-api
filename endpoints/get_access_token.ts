@@ -34,11 +34,12 @@ export const get_access_token: Endpoint = async (params, env) => {
 	if (!user_info) return { body: 'Failed to link user', status: 500 };
 
 	// save access token
-	const tok_success = await set_user_token({ meta_id, access_token }, env);
-	if (!tok_success)
+	const token_result = await set_user_token({ meta_id, access_token }, env);
+	if (!token_result)
 		return { body: 'Failed to setup access token', status: 500 };
 
 	const { grab_id, is_admin, is_list_moderator } = user_info;
+	const { expiry } = token_result;
 
 	const json = {
 		user_name,
@@ -46,6 +47,7 @@ export const get_access_token: Endpoint = async (params, env) => {
 		is_admin,
 		access_token,
 		is_list_moderator,
+		expiry,
 
 		// deprecated
 		alias: user_name,

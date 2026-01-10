@@ -1,10 +1,10 @@
 export async function generate_verification_code(
 	params: { meta_id: string },
 	env: Ctx,
-): Promise<string | null> {
+): Promise<{ code: string } | null> {
 	const { meta_id } = params;
 
-	const code = gen_code();
+	const code = generate_code();
 	const expiry = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
 
 	const query = env.sql`
@@ -16,13 +16,13 @@ export async function generate_verification_code(
 			expiry = excluded.expiry
 	`;
 
-	const { success } = await query.bind(meta_id, code, expiry).run();
+	const { success } = await query.run();
 	if (!success) return null;
 
-	return code;
+	return { code };
 }
 
-function gen_code() {
+function generate_code() {
 	const chars =
 		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 

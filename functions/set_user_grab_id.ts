@@ -1,7 +1,7 @@
 export async function set_user_grab_id(
 	params: { meta_id: string; grab_id: string },
 	env: Ctx,
-): Promise<boolean> {
+): Promise<{ success: boolean } | null> {
 	const { meta_id, grab_id } = params;
 
 	const query = env.sql`
@@ -11,6 +11,7 @@ export async function set_user_grab_id(
 	`;
 
 	const { success } = await query.run();
+	if (!success) return null;
 
-	return success;
+	return { success };
 }

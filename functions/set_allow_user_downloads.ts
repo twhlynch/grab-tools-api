@@ -1,7 +1,7 @@
 export async function set_allow_user_downloads(
 	params: { user_id: string; allow: boolean },
 	env: Ctx,
-): Promise<boolean> {
+): Promise<{ success: boolean } | null> {
 	const { user_id, allow } = params;
 
 	const query = env.sql`
@@ -13,6 +13,7 @@ export async function set_allow_user_downloads(
 	`;
 
 	const { success } = await query.run();
+	if (!success) return null;
 
-	return success;
+	return { success };
 }

@@ -33,8 +33,8 @@ export const verify_account: Endpoint = async (params, env) => {
 
 	if (level_id) {
 		// get users code
-		const code = await get_user_verification_code({ meta_id }, env);
-		if (!code) return { body: 'No valid code generated', status: 400 };
+		const code_res = await get_user_verification_code({ meta_id }, env);
+		if (!code_res) return { body: 'No valid code generated', status: 400 };
 
 		// get level details
 		const level_details = await get_level_details({ level_id }, env);
@@ -42,6 +42,7 @@ export const verify_account: Endpoint = async (params, env) => {
 			return { body: 'Failed fetching user', status: 400 };
 
 		// check for code
+		const code = `GT-${code_res.code}`;
 		const { description, title, identifier } = level_details;
 		if (!description?.includes?.(code) && !title?.includes?.(code))
 			return { body: 'Code not found in level', status: 400 };

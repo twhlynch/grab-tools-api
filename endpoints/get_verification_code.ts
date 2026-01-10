@@ -11,8 +11,10 @@ export const get_verification_code: Endpoint = async (params, env) => {
 	const { meta_id } = user_info;
 	if (!meta_id) return { body: 'Invalid user', status: 400 };
 
-	const code = await generate_verification_code({ meta_id }, env);
-	if (!code) return { body: 'Failed generating code', status: 500 };
+	const code_info = await generate_verification_code({ meta_id }, env);
+	if (!code_info) return { body: 'Failed generating code', status: 500 };
+
+	const { code } = code_info;
 
 	const json = { code };
 	return { body: JSON.stringify(json), status: 200 };
