@@ -9,9 +9,6 @@ declare global {
 	) => Promise<{ body: string; status: number }>;
 
 	export type Ctx = Env & {
-		GRAB_API: string;
-		META_API: string;
-		HARDEST_PEOPLE_CHANNEL: string;
 		sql: (
 			strings: TemplateStringsArray,
 			...values: any[]

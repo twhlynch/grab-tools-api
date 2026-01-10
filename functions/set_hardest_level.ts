@@ -1,12 +1,13 @@
 import { get_level_details } from '../requests/get_level_details';
 import { send_discord_message } from '../requests/send_discord_message';
+import { HARDEST_PEOPLE_CHANNEL } from '../config';
 
 export async function set_hardest_level(
 	params: { level_id: string; position: number },
 	env: Ctx,
 ): Promise<boolean> {
 	const { level_id, position } = params;
-	const { DB, HARDEST_PEOPLE_CHANNEL } = env;
+	const { DB } = env;
 
 	const level_details = await get_level_details({ level_id }, env);
 	if (!level_details) return false;

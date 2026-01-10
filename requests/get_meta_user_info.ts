@@ -1,11 +1,11 @@
+import { META_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
 export async function get_meta_user_info(
 	params: { access_token: string },
-	env: Ctx,
+	_env: Ctx,
 ): Promise<{ meta_id: string; user_name: string } | null> {
 	const { access_token } = params;
-	const { META_API } = env;
 
 	const fields = [`id`, `alias`].join(',');
 

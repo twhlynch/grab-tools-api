@@ -1,3 +1,4 @@
+import { META_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
 export async function get_meta_oauth_token(
@@ -5,7 +6,7 @@ export async function get_meta_oauth_token(
 	env: Ctx,
 ): Promise<string | null> {
 	const { org_scoped_id, code } = params;
-	const { META_APP_ID, META_APP_SECRET, META_API } = env;
+	const { META_APP_ID, META_APP_SECRET } = env;
 
 	const access_token = `OC|${META_APP_ID}|${META_APP_SECRET}`;
 

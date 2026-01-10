@@ -1,11 +1,11 @@
+import { GRAB_API } from '../config';
 import { build_url, safe_fetch_json } from '../utils';
 
 export async function get_level_details(
 	params: { level_id: string },
-	env: Ctx,
+	_env: Ctx,
 ): Promise<LevelDetails | null> {
 	const { level_id } = params;
-	const { GRAB_API } = env;
 
 	const [user_id, level_timestamp] = level_id.split(':');
 
