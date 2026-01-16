@@ -9,6 +9,7 @@ export async function get_hardest_levels_list(
 	const query = env.sql`
 		SELECT *
 		FROM list
+		ORDER BY position
 		LIMIT ${limit}
 	`;
 
