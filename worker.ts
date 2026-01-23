@@ -7,6 +7,7 @@ import { add_hardest_level } from './endpoints/add_hardest_level';
 import { remove_hardest_level } from './endpoints/remove_hardest_level';
 import { set_allow_downloads } from './endpoints/set_allow_downloads';
 import { can_download_level } from './endpoints/can_download_level';
+import { get_allow_downloads } from './endpoints/get_allow_downloads';
 
 async function handleRequest(request: Request, _env: Env) {
 	const headers = build_headers(request);
@@ -49,6 +50,7 @@ async function handleRequest(request: Request, _env: Env) {
 			get_hardest_levels,
 			set_allow_downloads,
 			can_download_level,
+			get_allow_downloads,
 		};
 		if (endpoints[route]) {
 			const { body, status } = await endpoints[route](params, env);

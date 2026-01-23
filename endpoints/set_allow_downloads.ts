@@ -1,7 +1,7 @@
 import { get_access_token_user } from '../functions/get_access_token_user';
 import { set_allow_level_downloads } from '../functions/set_allow_level_downloads';
 import { set_allow_user_downloads } from '../functions/set_allow_user_downloads';
-import { parse_boolean } from '../utils';
+import { parse_boolean_or_null } from '../utils';
 
 export const set_allow_downloads: Endpoint = async (params, env) => {
 	const { level_id, user_id, allow: allow_raw, access_token } = params;
@@ -12,9 +12,9 @@ export const set_allow_downloads: Endpoint = async (params, env) => {
 	if (!level_id && !user_id)
 		return { body: 'One of level_id or user_id is required', status: 400 };
 
-	const allow = parse_boolean(allow_raw);
-	const valid = allow !== null;
-	if (!valid) return { body: 'Allow must be a boolean', status: 400 };
+	const allow = parse_boolean_or_null(allow_raw);
+	const valid = allow !== undefined;
+	if (!valid) return { body: 'Allow must be a boolean or null', status: 400 };
 
 	const user_info = await get_access_token_user({ access_token }, env);
 	if (!user_info) return { body: 'Invalid access_token', status: 401 };
