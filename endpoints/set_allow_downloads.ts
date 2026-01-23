@@ -33,6 +33,8 @@ export const set_allow_downloads: Endpoint = async (params, env) => {
 		if (!success) return { body: 'Failed', status: 500 };
 	} else if (user_id) {
 		if (user_id !== grab_id) return { body: 'Must be user', status: 401 };
+		if (allow === null)
+			return { body: 'Allow cannot be null for user', status: 400 };
 
 		const success = await set_allow_user_downloads({ user_id, allow }, env);
 		if (!success) return { body: 'Failed', status: 500 };
