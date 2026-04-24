@@ -7,12 +7,17 @@ export async function get_allow_level_downloads(
 	const user_id = level_id.split(':')[0];
 
 	const query = env.sql`
-		SELECT
-			COALESCE(level.allow, user.allow, -1) AS allow
-		FROM downloads level
-		LEFT JOIN user_downloads user
-			ON user.grab_id = ${user_id}
-		WHERE level.level_id = ${level_id};
+		SELECT COALESCE(
+			(
+				SELECT allow FROM downloads
+				WHERE level_id = ${level_id}
+			),
+			(
+				SELECT allow FROM user_downloads
+				WHERE grab_id = ${user_id}
+			),
+			-1
+		) AS allow;
 	`;
 
 	const result = await query.first<{ allow: 0 | 1 | -1 } | null>();
