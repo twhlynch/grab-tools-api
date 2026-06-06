@@ -69,6 +69,7 @@ function build_headers(request: Request) {
 		'grabvr.tools',
 		'grabvr.quest',
 		'twhlynch.me',
+		'tauri.localhost',
 		'127.0.0.1',
 		'localhost',
 	];
