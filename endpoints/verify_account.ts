@@ -39,7 +39,7 @@ export const verify_account: Endpoint = async (params, env) => {
 		// get level details
 		const level_details = await get_level_details({ level_id }, env);
 		if (!level_details)
-			return { body: 'Failed fetching user', status: 400 };
+			return { body: 'Failed fetching level', status: 400 };
 
 		// check for code
 		const code = `GT-${code_res.code}`;
