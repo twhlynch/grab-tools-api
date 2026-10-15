@@ -4,7 +4,7 @@ export async function set_user_token(
 ): Promise<{ expiry: number } | null> {
 	const { meta_id, access_token } = params;
 
-	const expiry = Math.floor(Date.now() / 1000) + 24 * 60 * 60;
+	const expiry = Math.floor(Date.now() / 1000) + 24 * 60 * 60 * 7;
 
 	const query = env.sql`
 		INSERT INTO tokens (meta_id, token, expiry)
