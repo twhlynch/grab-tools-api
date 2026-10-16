@@ -20,11 +20,11 @@ export const set_allow_downloads: Endpoint = async (params, env) => {
 	if (!user_info) return { body: 'Invalid access_token', status: 401 };
 
 	const { grab_id } = user_info;
-	if (!grab_id) return { body: 'Account must be verified', status: 401 };
+	if (!grab_id) return { body: 'Account must be verified', status: 400 };
 
 	if (level_id) {
 		const owns_level = grab_id === level_id.split(':')[0];
-		if (!owns_level) return { body: 'Must be owner of level', status: 401 };
+		if (!owns_level) return { body: 'Must be owner of level', status: 400 };
 
 		const success = await set_allow_level_downloads(
 			{ level_id, allow },
@@ -32,7 +32,7 @@ export const set_allow_downloads: Endpoint = async (params, env) => {
 		);
 		if (!success) return { body: 'Failed', status: 500 };
 	} else if (user_id) {
-		if (user_id !== grab_id) return { body: 'Must be user', status: 401 };
+		if (user_id !== grab_id) return { body: 'Must be user', status: 400 };
 		if (allow === null)
 			return { body: 'Allow cannot be null for user', status: 400 };
 
