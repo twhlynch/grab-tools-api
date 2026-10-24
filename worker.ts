@@ -84,8 +84,10 @@ function build_headers(request: Request) {
 	const origin = request.headers.get('Origin');
 	if (origin) {
 		const hostname = new URL(origin).hostname;
-		const domain = hostname.split('.').slice(-2).join('.');
-		if (DOMAINS.includes(domain) || DOMAINS.includes(hostname)) {
+		if (
+			DOMAINS.includes(hostname) ||
+			DOMAINS.some((domain) => hostname.endsWith('.' + domain))
+		) {
 			headers.set('Access-Control-Allow-Origin', origin);
 		}
 	}
