@@ -66,6 +66,7 @@ async function handleRequest(request: Request, _env: Env) {
 
 function build_headers(request: Request) {
 	const DOMAINS = [
+		'grab-tools.pages.dev',
 		'grabvr.tools',
 		'grabvr.quest',
 		'twhlynch.me',
