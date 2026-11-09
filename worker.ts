@@ -1,4 +1,5 @@
 import { get_access_token } from './endpoints/get_access_token';
+import { expire_access_token } from './endpoints/expire_access_token';
 import { get_verification_code } from './endpoints/get_verification_code';
 import { verify_account } from './endpoints/verify_account';
 import { sentry_proxy } from './endpoints/sentry_proxy';
@@ -43,6 +44,7 @@ async function handleRequest(request: Request, _env: Env) {
 
 		const endpoints: Record<string, Endpoint> = {
 			get_access_token,
+			expire_access_token,
 			get_verification_code,
 			verify_account,
 			add_hardest_level,

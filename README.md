@@ -7,6 +7,7 @@ Run `wrangler types` to generate `worker-configuration.d.ts` for types completio
 | Endpoint                                           | Description                          | Auth          |
 | -------------------------------------------------- | ------------------------------------ | ------------- |
 | [`/get_access_token`](#get_access_token)           | Login with Meta for an access token  | Service token |
+| [`/expire_access_token`](#expire_access_token)     | Expire an access token               | Access token  |
 | [`/get_verification_code`](#get_verification_code) | Generate OTP verification code       | Access token  |
 | [`/verify_account`](#verify_account)               | Verify and link GRAB account         | Access token  |
 | [`/add_hardest_level`](#add_hardest_level)         | Add or move a level on the GHL       | Access token  |
@@ -30,6 +31,18 @@ Run `wrangler types` to generate `worker-configuration.d.ts` for types completio
 | `grab_id`      | `String \| null` | Linked GRAB user ID |
 | `is_admin`     | `Boolean`        | Admin permissions   |
 | `access_token` | `String`         | New access token    |
+
+## `/expire_access_token`
+
+### Request
+
+| Parameter      | Type     | Description  |
+| -------------- | -------- | ------------ |
+| `access_token` | `String` | Access token |
+
+### Response
+
+'Success'
 
 ## `/get_verification_code`
 
